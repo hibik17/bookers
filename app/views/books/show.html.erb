@@ -1,0 +1,78 @@
+<p id="notice">
+  <% if flash[:notice] %>
+    <%= flash[:notice] %>
+  <% end %>
+</p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <%= render 'common', book: @book, user: @book_one.user %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <a>
+                <%= link_to image_tag(@book_one.user.get_profile_image(40,40)), user_path(@book_one.user) %><br>
+                <%= link_to @book_one.user.name, user_path(@book_one.user_id) %>
+              </a>
+            </td>
+            <td>
+              <%= link_to @book_one.title, book_path(@book_one) %>
+            </td>
+            <td>
+              <%= @book_one.body %>
+            </td>
+            <% if @book_one.user == current_user %>
+              <td>
+                <%= link_to "Edit", edit_book_path, class: "btn btn-sm btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Destroy", book_path(@book_one), method: :delete, class: "btn btn-sm btn-danger ", "data-confirm" => "本当に削除しますか？" %>
+              </td>
+              <td>
+                <%= render 'good', book: @book_one %>
+              </td>
+              <td>
+                コメント数: <%= @book_one.book_comments.count %>
+              </td>
+            <% else %>
+              <%= render 'good', book: @book_one %>
+              <td>
+                コメント数: <%= @book_one.book_comments.count %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <table>
+          <% @book_one.book_comments.each do |book_comment| %>
+          <tr>
+            <td>
+              <%= image_tag book_comment.user.get_profile_image(40,40) %><br>
+              <%= link_to book_comment.user.name, user_path(book_comment.user_id) %>
+            </td>
+            <td>
+              <%= book_comment.comment %>
+            </td>
+            <td>
+              <% if book_comment.user == current_user %>
+                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+      <div>
+        <%= form_with model: [@book_one, @book_comment] do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment , class: "form-control" %>
+        </div>
+        <div>
+          <%= f.submit "送信" %>
+        </div>
+        <% end %>
+      </div>
+    </div>

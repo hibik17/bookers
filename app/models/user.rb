@@ -22,4 +22,10 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def self.search(word)
+    @result_name = self.where("name LIKE?", "%#{word}")
+    @result_introduction = self.where("introduction LIKE?", "%#{word}")
+    @users = @result_name + @result_introduction
+    return @users
+  end
 end

@@ -1,6 +1,6 @@
 <p></p>
 <div class="container px-5 px-sm-0">
-  <div id="error_explanation">
+  <div id="error_explanation text-red">
     <% if @book.errors.any? %>
       <h3>
         <% if @book.errors.count == 1 %>
@@ -19,6 +19,7 @@
   <div class="row">
     <%= render 'common', book: @book ,user: current_user %>
     <div class="col-md-8 offset-md-1">
+      <%= render "books/search" %>
       <h2>Books</h2>
       <table class="table table-hover table-inverse">
         <thead>
@@ -30,14 +31,18 @@
           </tr>
         </thead>
         <tbody>
-          <% @books.each do |book| %>
-            <tr>
-              <td><%= link_to image_tag(book.user.get_profile_image(40,40)), user_path(book.user) %></td>
-              <td><%= link_to book.title, book_path(book) %></td>
-              <td><%= book.body %></td>
-              <%= render 'good', book: book %>
-              <td>コメント数: <%= book.book_comments.count %></td>
-            </tr>
+          <% if @books != nil %>
+            <% @books.each do |book| %>
+              <tr>
+                <td><%= link_to image_tag(book.user.get_profile_image(40,40)), user_path(book.user) %></td>
+                <td><%= link_to book.title, book_path(book) %></td>
+                <td><%= book.body %></td>
+                <%= render 'good', book: book %>
+                <td>コメント数: <%= book.book_comments.count %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <div class="text-red">検索結果がありません</div>
           <% end %>
         </tbody>
       </table>

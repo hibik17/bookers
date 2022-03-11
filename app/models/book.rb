@@ -9,4 +9,12 @@ class Book < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
+  def self.search(word)
+    @result_title = self.where("title LIKE?", "%#{word}")
+    @result_body = self.where("body LIKE?", "%#{word}")
+    @books = @result_title + @result_body
+    return @books
+  end
+
 end

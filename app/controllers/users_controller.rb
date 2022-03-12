@@ -30,7 +30,13 @@ class UsersController < ApplicationController
 
   def search
     @users = User.search(params[:user_search])
-    render :index
+    if @users.count != 0
+      render :index
+    else
+      flash[:notice] = "検索対象にヒットしたものはありませんでした。"
+      redirect_to users_path
+    end
+    
   end
   
   private

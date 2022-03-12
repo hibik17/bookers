@@ -4,6 +4,7 @@
     <%= render 'books/common', book: @book , user: current_user %>
     <div class="col-md-8 offset-md-1">
       <%= render 'users/search' %>
+      <div class="text-danger"><%= flash[:notice] %></div>
       <h2>Users</h2>
       <table class="table">
         <thread>
@@ -22,10 +23,8 @@
                 <td><%= link_to "Show", user_path(user.id) %></td>
               </tr>
             <% end %>
-          <% elsif @users == nil %>
-            <tr>
-              <th>検索該当するものはありませんでした。</th>
-            </tr>
+          <% elsif @users == [] %>
+            <div class="text-danger">検索結果としてヒットしたものはありませんでした。</div>
           <% end %>
         </tbody>
       </table>

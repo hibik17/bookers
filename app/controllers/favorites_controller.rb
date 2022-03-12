@@ -1,11 +1,11 @@
 class FavoritesController < ApplicationController
 
   def create
-    binding.pry
     book = Book.find(params[:book_id])
     favorite = current_user.favorites.new(book_id: book.id)
+    @excute_path = request.fullpath
     if favorite.save
-      redirect_back(fallback_location: root_path)
+      when      
     else
       redirect_back(fallback_location: root_path)
     end

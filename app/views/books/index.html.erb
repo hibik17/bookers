@@ -20,6 +20,7 @@
     <%= render 'common', book: @book ,user: current_user %>
     <div class="col-md-8 offset-md-1">
       <%= render "books/search" %>
+      <div class="text-danger"><%= flash[:notice] %></div>
       <h2>Books</h2>
       <table class="table table-hover table-inverse">
         <thead>

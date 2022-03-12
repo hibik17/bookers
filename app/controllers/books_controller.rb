@@ -49,7 +49,12 @@ class BooksController < ApplicationController
   def search
     @books = Book.search(params[:word])
     @book = Book.new
-    render :index
+    if @books.count != 0
+      render :index
+    else
+      flash[:notice] = "検索対象にヒットしたものはありませんでした。"
+      redirect_to books_path
+    end
   end
 
   private

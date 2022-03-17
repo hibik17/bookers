@@ -1,0 +1,13 @@
+<% if current_user.following?(user) %>
+<th>
+  <%= link_to user_relationships_path(user.id), method: :delete, class: "btn btn-outline-secondary btn-block" do %> 
+    unfollow
+  <% end %>
+</th>
+<% else %>
+<th>
+  <%= link_to user_relationships_path(user.id), method: :post, class: "btn btn-outline-secondary btn-block" do %>
+    follow 
+  <% end %>
+</th>
+<% end %>

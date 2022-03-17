@@ -31,7 +31,7 @@
                 <%= link_to "Destroy", book_path(@book_one), method: :delete, class: "btn btn-sm btn-danger ", "data-confirm" => "本当に削除しますか？" %>
               </td>
               <td>
-                <%= render 'good', book: @book_one %>
+                <%= render 'favorites/favorite_button', book: @book_one %>
               </td>
               <td>
                 コメント数: <%= @book_one.book_comments.count %>

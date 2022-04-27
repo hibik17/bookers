@@ -8,11 +8,11 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :followers, source: :follower
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :follower             #後ろに付く人を取ってくる(フォロワーを取ってくる、自分がフォローしている人を取ってくる
   
-  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followings, source: :followed
+  has_many :relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
+  has_many :followings, through: :relationships, source: :followed                      #fフォローされる人を取ってくる、フォローしてくれている人を取ってくる
   
   has_one_attached :profile_image
 
@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def unfollow(user)
-    relationships.find(followed_id: user.id).destroy
+    relationships.find_by(followed_id: user.id).destroy
   end
 
   def following?(user)

@@ -35,6 +35,10 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  def followed_by?(user)
+    followings.include?(user)
+  end
+
   def get_profile_image(weight, height)
     unless self.profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

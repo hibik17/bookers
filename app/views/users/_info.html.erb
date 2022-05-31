@@ -17,11 +17,35 @@
     <td><%= link_to user.followers.count, user_followers_path(user) %></td>
   </tr>
 </table>
-　
-<div class='row'>
-  <% if current_user != user %>
-    <%= render "relationships/btn", user: user %>
+
+<div class='row my-3'>
+  <div class='w-50'>
+    <% if current_user != user %>
+      <%= render "relationships/btn", user: user %>
+    <% end %>
+  </div>
+  <% if request.path == "/users/#{user.id}" %>
+    <div class="w-50">
+      <% unless user.id == current_user.id %>
+        <% if (current_user.followed_by? user) && (user.followed_by? current_user)  %>
+          <% if @isRoom == true %>
+            <div class="user-show-room">
+              <%= link_to "チャットを始める", room_path(@room.id), class: "btn btn-primary" %>
+            </div>
+          <% else %>
+            <%= form_for @room do |f| %>
+              <%= fields_for @entry do |e| %>
+                <%= e.hidden_field :user_id, value: user.id %>
+              <% end %>
+              <div><%= f.submit "チャットを始める", class:"btn btn-primary"%></div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
+</div>
+<div class='w-full'>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
     <i class="fas fa-user-cog"></i>
   <% end %>

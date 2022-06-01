@@ -1,0 +1,14 @@
+<table class='table'>
+  <tr>
+    <th>今週の投稿数</th>
+    <th>前週の投稿数</th>
+    <th>前週比</th>
+  </tr>
+  <tr>
+    <td><%= week_post %></td>
+    <td><%= lastweek_post %></td>
+    <td>
+      <%= week_ratio.to_s + "%" %>
+    </td>
+  </tr>
+</table>

@@ -20,6 +20,7 @@ class BooksController < ApplicationController
       }.reverse
 
     @book = Book.new
+
   end
 
   def create

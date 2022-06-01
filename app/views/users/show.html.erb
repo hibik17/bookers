@@ -9,6 +9,11 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
+      <h2>投稿数の前日比・前週比</h2>
+      <%= render 'post_count/dayPostCount', todays_posts: @todays_post, lastdays_post: @lastdays_post, ratio: @ratio %>
+      <%= render 'post_count/weekPostCount', week_post: @week_post, lastweek_post: @lastweek_post, week_ratio: @week_ratio %>
+      <h2>7日分の投稿数</h2>
+      <%= render 'post_count/sevendaysPostCount', day_array: @day_array%>
     </div>
   </div>
 </div>

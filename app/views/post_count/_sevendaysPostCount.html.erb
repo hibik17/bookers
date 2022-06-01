@@ -1,0 +1,16 @@
+<table class='table'>
+  <tr>
+    <% for i in day_array %>
+      <% if i != 7 %>
+        <th><%= i %>日前</th>
+      <% else %>
+        <th>今日</th>
+      <% end %>
+    <% end %>
+  </tr>
+  <tr>
+    <% @weekposts_array.reverse!.each do |post_count| %>
+      <th><%= post_count %></th>
+    <% end %>
+  </tr>
+</table>

@@ -1,0 +1,26 @@
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: <%= day_array %>,
+        datasets: [{
+            label: '投稿した本の数',
+            data: <%= weekposts_array %>,
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>

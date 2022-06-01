@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user=User.find(params[:id])
-    @books = Book.new
+    @book = Book.new
     @books = @user.books
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @user.id)

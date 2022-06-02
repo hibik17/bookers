@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 for i in [1,2,3,4]
-  Book.create(user_id: 1, title: "title", body: "body")
+  Book.create(user_id: 4, title: "title", body: "body")
 end

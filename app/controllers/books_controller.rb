@@ -50,6 +50,13 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def search_by_calender
+    from = Time.parse(params[:search_date]).at_beginning_of_day
+    to = Time.parse(params[:search_date]).at_end_of_day
+    @result = Book.where(user_id: params[:user_id], created_at: from ... to).count
+    render 'post_count/search'
+  end
+
   private
 
   def book_params

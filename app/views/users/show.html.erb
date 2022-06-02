@@ -16,6 +16,14 @@
       <%= render 'post_count/sevendaysPostCount', day_array: @day_array%>
       <h4 class="text-center text-primary">7日間の投稿数の比較</h4>
       <%= render 'post_count/sevendaysChart', weekposts_array: @weekposts_array, day_array: @day_array %>
+      <div class="search_by_calender">
+        <%= render 'post_count/searchPostCountByCalender', user: @user %>
+      </div>
+      <div id="search_res">
+        <% if @result.present? %>
+          <%= render 'post_count/searchByCalender', result: @result %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

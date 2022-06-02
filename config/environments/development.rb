@@ -74,4 +74,7 @@ Rails.application.configure do
   config.hosts << "6e5931b3173d42ab81a4df9f5e843350.vfs.cloud9.us-east-1.amazonaws.com"
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # mail development
+  config.action_mailer.delivery_method = :letter_opener_web
 end

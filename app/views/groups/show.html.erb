@@ -33,7 +33,7 @@
             <td>
               <% if @group.owner_id == current_user.id %>
                 <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
-                <%= link_to 'Notice an Event', edit_group_path(@group), class: "btn btn-sm btn-primary" %>
+                <%= link_to 'Notice an Event', group_new_event_path(@group.id), class: "btn btn-sm btn-primary" %>
               <% else %>
                 <% if @group.group_users.find_by(user_id: current_user.id).present? %>
                   <%= link_to "left this group", group_path(@group.id), method: :delete, class: "btn btn-sm btn-danger" %>

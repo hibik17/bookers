@@ -30,5 +30,7 @@ Rails.application.routes.draw do
   post '/search_by_calender' => 'books#search_by_calender'
 
   # group
-  resources :groups, except: [:destroy]
+  resources :groups do
+    post 'join_group' => 'groups#join_group'
+  end
 end

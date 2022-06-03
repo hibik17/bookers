@@ -42,4 +42,7 @@ Rails.application.routes.draw do
   post 'search_book/order_by_date' => 'books#order_by_date'
   post 'search_book/order_by_rate' => 'books#order_by_rate'
 
+  # search_by_tagname
+  post 'search_by_tagname' => 'books#search_by_tag'
+
 end

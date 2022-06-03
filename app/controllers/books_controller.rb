@@ -69,6 +69,14 @@ class BooksController < ApplicationController
     render 'index'
   end
 
+  def search_by_tag
+    tag = ActsAsTaggableOn::Tag.all.find_by(name: params[:tag_name])
+    tag.present? ? tag_name = tag.name : tag_name = nil
+    @books = Book.tagged_with(tag_name)
+    @book = Book.new
+    render 'index'
+  end
+
   private
 
   def book_params

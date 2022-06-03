@@ -22,4 +22,7 @@ class Book < ApplicationRecord
     greater_than_or_equal_to: 1
   }, presence: true
 
+  # tag
+  acts_as_taggable
+
 end

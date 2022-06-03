@@ -17,6 +17,8 @@
 <% end %>
 
 <script>
+  var isEdit = $(location).attr('pathname').includes('/edit')
+
   $('.star.form-group').raty({
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
@@ -24,5 +26,7 @@
     starHalf: '<%= asset_path('star-half.png') %>',
     scoreName: 'book[rate]',
     half: true,
+    readOnly: isEdit,
+    score: <%= book.rate %>,
   });
 </script>

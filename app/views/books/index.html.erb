@@ -9,6 +9,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
+      <%= link_to "新着順", search_book_order_by_date_path, method: :post%> | <%= link_to "評価順", search_book_order_by_rate_path, method: :post %>
       <%= render 'index', books: @books%>
     </div>
   </div>

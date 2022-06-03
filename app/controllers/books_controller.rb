@@ -57,6 +57,18 @@ class BooksController < ApplicationController
     render 'post_count/search'
   end
 
+  def order_by_date
+    @book = Book.new
+    @books = Book.all.order(create_at: :desc)
+    render 'index'
+  end
+
+  def order_by_rate
+    @book = Book.new
+    @books = Book.all.order(rate: :desc)
+    render 'index'
+  end
+
   private
 
   def book_params

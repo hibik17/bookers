@@ -38,5 +38,8 @@ Rails.application.routes.draw do
     get '/confirm_mail' => 'groups#confirm_mail'
   end
 
+  # order books
+  post 'search_book/order_by_date' => 'books#order_by_date'
+  post 'search_book/order_by_rate' => 'books#order_by_rate'
 
 end

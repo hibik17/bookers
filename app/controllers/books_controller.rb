@@ -57,10 +57,30 @@ class BooksController < ApplicationController
     render 'post_count/search'
   end
 
+  def order_by_date
+    @book = Book.new
+    @books = Book.all.order(create_at: :desc)
+    render 'index'
+  end
+
+  def order_by_rate
+    @book = Book.new
+    @books = Book.all.order(rate: :desc)
+    render 'index'
+  end
+
+  def search_by_tag
+    tag = ActsAsTaggableOn::Tag.all.find_by(name: params[:tag_name])
+    tag.present? ? tag_name = tag.name : tag_name = nil
+    @books = Book.tagged_with(tag_name)
+    @book = Book.new
+    render 'index'
+  end
+
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :rate)
+    params.require(:book).permit(:title, :body, :rate, :tag_list)
   end
 
   def ensure_correct_user

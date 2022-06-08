@@ -4,6 +4,7 @@
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
+      <th>Category</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,15 @@
         </td>
         <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
         <td><%= book.body %></td>
+        <td>
+          <% book.tags.each do |tag| %>
+            <%= form_with url: search_by_tagname_path, method: :post do |f| %>
+              <%= f.hidden_field :tag_name, :value => tag.name %>
+              <%= f.submit tag.name, class: "btn btn-link link_primary" %>
+            <% end %>
+            <br />
+          <% end %>
+        </td>
         <td class=<%= "favorite-" + book.id.to_s %> >
             <%= render "favorites/btn", book: book %>
         </td>

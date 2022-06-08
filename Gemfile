@@ -58,3 +58,4 @@ gem 'devise'
 
 gem 'pry-byebug'
 gem 'impressionist'
+gem 'acts-as-taggable-on'

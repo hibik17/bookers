@@ -7,6 +7,10 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.text_field :tag_list, value: book.tag_list.join(','), class: 'form-control' %>
+  </div>
   <div class="star form-group">
     <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
     <%= f.hidden_field :rate, id: :review_star %>

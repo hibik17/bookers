@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_06_02_073316) do
     t.text "body"
     t.integer "user_id"
     t.integer "impressions_count", default: 0
+    t.float "rate", default: 0.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

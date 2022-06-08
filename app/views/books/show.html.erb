@@ -8,7 +8,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
-  		<table class='table'>
+  		<table class='table table-sm'>
   		  <tr>
           <td><%= link_to(@book.user) do %>
             <%= image_tag @book.user.get_profile_image(100,100) %><br>
@@ -24,17 +24,30 @@
             <%= render "book_comments/counter", book: @book %>
             </div>
           </td>
+          <td id="star-rate<%= @book.id%>">
+            <script>
+              $('#star-rate<%= @book.id%>').raty({
+                size      : 36,
+                starOff   : '<%= asset_path('star-off.png') %>',
+                starOn    : '<%= asset_path('star-on.png') %>',
+                starHalf  : '<%= asset_path('star-half.png') %>',
+                half      : true,
+                readOnly: true,
+                score: <%= @book.rate %>,
+              });
+            </script>
+          </td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}" %></td>
           <% end %>
         </tr>
       </table>
-      
+
       <div class="book-comments-index">
         <%= render "book_comments/index", book: @book %>
       </div>
-      
+
       <div class="comment-textarea">
        <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
       </div>

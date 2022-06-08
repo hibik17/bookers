@@ -4,7 +4,7 @@
       <th></th>
       <th>グループ名</th>
       <th>紹介文</th>
-      <th colspan="3"></th>
+      <th colspan="3">メンバー</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +21,7 @@
           <% end %>
         </td>
         <td><%= group.introduction %></td>
-        <td><%= link_to "Edit", edit_group_path(group.id), class: 'btn btn-success' %></td>
+        <td><%= group.group_users.count %></td>
       </tr>
     <% end %>
   </tbody>

@@ -60,6 +60,7 @@ class UsersController < ApplicationController
     # define the array to maintain the post count of each day
     @weekposts_array = Array.new
 
+    # find post by loop
     for i in @day_array
       day_num = i - 1
       @weekposts_array.push(Book.where(user_id: @user.id, created_at: (Time.current - day_num.day).at_beginning_of_day ... (Time.current - day_num.day)).count)

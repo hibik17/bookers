@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'groups/index'
+  get 'groups/new'
+  get 'groups/edit'
+  get 'groups/show'
   get 'rooms/show'
   devise_for :users
 
@@ -21,4 +25,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show,:edit,:update]
   resources :messages, only: [:create]
   resources :rooms, only: [:create,:show]
+
+  # search post count by calender
+  post '/search_by_calender' => 'books#search_by_calender'
+
+  # group
+  resources :groups, except: [:destroy]
 end

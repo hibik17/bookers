@@ -23,6 +23,10 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
 
+  # group relation
+  has_many :group_users
+  has_many :groups, through: :group_users
+
   def follow(user)
     relationships.create(followed_id: user.id)
   end

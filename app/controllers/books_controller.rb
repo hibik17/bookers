@@ -5,10 +5,11 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @book_comment = BookComment.new
+    impressionist(@book, nil, unique: [:ip_address])
   end
 
   def index
-    # set the date of start 
+    # set the date of start
     from = (Time.current - 6.day).at_beginning_of_day
     # set the date of end
     to = Time.current.at_end_of_day
@@ -17,7 +18,7 @@ class BooksController < ApplicationController
       sort_by {|x|
         x.favorited_users.includes(:favorites).where(created_at: from...to).size
       }.reverse
-      
+
     @book = Book.new
   end
 

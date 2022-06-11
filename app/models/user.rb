@@ -50,4 +50,12 @@ class User < ApplicationRecord
     end
     self.profile_image.variant(resize_to_fill: [weight,height]).processed
   end
+
+  # guest sign_in method
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
+  end
 end

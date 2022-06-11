@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:edit]
 
   def show
     @user=User.find(params[:id])
@@ -60,6 +61,7 @@ class UsersController < ApplicationController
     # define the array to maintain the post count of each day
     @weekposts_array = Array.new
 
+    # find post by loop
     for i in @day_array
       day_num = i - 1
       @weekposts_array.push(Book.where(user_id: @user.id, created_at: (Time.current - day_num.day).at_beginning_of_day ... (Time.current - day_num.day)).count)
@@ -92,6 +94,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     unless @user == current_user
       redirect_to user_path(current_user)
+    end
+  end
+
+  def ensure_guest_user
+    user = User.find(params[:id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
 end

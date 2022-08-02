@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe '[STEP3] 仕上げのテスト' do
@@ -12,7 +14,7 @@ describe '[STEP3] 仕上げのテスト' do
     it 'ユーザ新規登録成功時' do
       visit new_user_registration_path
       fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
-      fill_in 'user[email]', with: 'a' + user.email # 確実にuser, other_userと違う文字列にするため
+      fill_in 'user[email]', with: "a#{user.email}" # 確実にuser, other_userと違う文字列にするため
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
       click_button 'Sign up'
@@ -71,7 +73,7 @@ describe '[STEP3] 仕上げのテスト' do
       before do
         visit new_user_registration_path
         @name = Faker::Lorem.characters(number: 1)
-        @email = 'a' + user.email # 確実にuser, other_userと違う文字列にするため
+        @email = "a#{user.email}" # 確実にuser, other_userと違う文字列にするため
         fill_in 'user[name]', with: @name
         fill_in 'user[email]', with: @email
         fill_in 'user[password]', with: 'password'
@@ -89,7 +91,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
       it 'バリデーションエラーが表示される' do
         click_button 'Sign up'
-        expect(page).to have_content "is too short (minimum is 2 characters)"
+        expect(page).to have_content 'is too short (minimum is 2 characters)'
       end
     end
 
@@ -113,7 +115,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'user[name]', with: @name
       end
       it 'バリデーションエラーが表示される' do
-        expect(page).to have_content "is too short (minimum is 2 characters)"
+        expect(page).to have_content 'is too short (minimum is 2 characters)'
       end
     end
 
@@ -163,7 +165,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(book.reload.title).to eq @book_old_title
       end
       it '投稿編集画面を表示しており、フォームの内容が正しい' do
-        expect(current_path).to eq '/books/' + book.id.to_s
+        expect(current_path).to eq "/books/#{book.id}"
         expect(find_field('book[title]').text).to be_blank
         expect(page).to have_field 'book[body]', with: book.body
       end
@@ -217,7 +219,7 @@ describe '[STEP3] 仕上げのテスト' do
 
       context '表示内容の確認' do
         it 'URLが正しい' do
-          expect(current_path).to eq '/books/' + other_book.id.to_s
+          expect(current_path).to eq "/books/#{other_book.id}"
         end
         it '「Book detail」と表示される' do
           expect(page).to have_content 'Book detail'
@@ -271,7 +273,7 @@ describe '[STEP3] 仕上げのテスト' do
 
       context '表示の確認' do
         it 'URLが正しい' do
-          expect(current_path).to eq '/users/' + other_user.id.to_s
+          expect(current_path).to eq "/users/#{other_user.id}"
         end
         it '投稿一覧のユーザ画像のリンク先が正しい' do
           expect(page).to have_link '', href: user_path(other_user)
@@ -309,7 +311,7 @@ describe '[STEP3] 仕上げのテスト' do
     context '他人のユーザ情報編集画面' do
       it '遷移できず、自分のユーザ詳細画面にリダイレクトされる' do
         visit edit_user_path(other_user)
-        expect(current_path).to eq '/users/' + user.id.to_s
+        expect(current_path).to eq "/users/#{user.id}"
       end
     end
   end

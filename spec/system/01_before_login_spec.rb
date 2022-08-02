@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe '[STEP1] ユーザログイン前のテスト' do
@@ -141,7 +143,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
       it '新規登録後のリダイレクト先が、新規登録できたユーザの詳細画面になっている' do
         click_button 'Sign up'
-        expect(current_path).to eq '/users/' + User.last.id.to_s
+        expect(current_path).to eq "/users/#{User.last.id}"
       end
     end
   end
@@ -182,7 +184,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
 
       it 'ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている' do
-        expect(current_path).to eq '/users/' + user.id.to_s
+        expect(current_path).to eq "/users/#{user.id}"
       end
     end
 

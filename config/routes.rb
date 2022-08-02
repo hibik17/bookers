@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # mailer
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   devise_for :users
 
-  root :to =>"homes#top"
-  get "home/about"=>"homes#about"
+  root to: 'homes#top'
+  get 'home/about' => 'homes#about'
 
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
-    resources :book_comments, only: [:create, :destroy]
-    resource :favorites, only: [:create, :destroy]
+  resources :books, only: %i[index show edit create destroy update] do
+    resources :book_comments, only: %i[create destroy]
+    resource :favorites, only: %i[create destroy]
   end
 
-  resources :users, only: [:index,:show,:edit,:update] do
-    resource :relationships, only: [:create, :destroy]
+  resources :users, only: %i[index show edit update] do
+    resource :relationships, only: %i[create destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end
@@ -22,9 +24,9 @@ Rails.application.routes.draw do
   get '/search', to: 'searches#search'
 
   # DM
-  resources :users, only: [:show,:edit,:update]
+  resources :users, only: %i[show edit update]
   resources :messages, only: [:create]
-  resources :rooms, only: [:create,:show]
+  resources :rooms, only: %i[create show]
 
   # search post count by calender
   post '/search_by_calender' => 'books#search_by_calender'
@@ -47,5 +49,4 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-
 end

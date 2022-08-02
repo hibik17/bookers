@@ -1,4 +1,6 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -71,7 +73,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.active_job.queue_adapter = :inline
-  config.hosts << "6e5931b3173d42ab81a4df9f5e843350.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << '6e5931b3173d42ab81a4df9f5e843350.vfs.cloud9.us-east-1.amazonaws.com'
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 

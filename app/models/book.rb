@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Book < ApplicationRecord
   belongs_to :user
   has_many :book_comments, dependent: :destroy
@@ -6,8 +8,8 @@ class Book < ApplicationRecord
   # set the relationship between book and favorites
   has_many :favorited_users, through: :favorites, source: :user
 
-  validates :title,presence:true
-  validates :body,presence:true,length:{maximum:200}
+  validates :title, presence: true
+  validates :body, presence: true, length: { maximum: 200 }
 
   # PV
   is_impressionable counter_cache: true
@@ -24,5 +26,4 @@ class Book < ApplicationRecord
 
   # tag
   acts_as_taggable
-
 end

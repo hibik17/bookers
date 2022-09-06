@@ -68,3 +68,7 @@ group :production do
 end
 
 gem 'rubocop'
+
+gem "net-smtp"
+gem "net-pop"
+gem "net-imap"
